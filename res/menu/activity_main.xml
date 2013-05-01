@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_main"
+        android:title="@string/menu_main"
+        android:icon="@drawable/home"
+        android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/menu_reserv_call"
+        android:title="@string/menu_reserv_call"
+        android:icon="@drawable/phone"
+        android:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/menu_settings"
+        android:title="@string/menu_settings"
+        android:icon="@drawable/setting"
+        android:showAsAction="ifRoom|withText" />
+    
+</menu>

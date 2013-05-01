@@ -1,0 +1,149 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dip"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dip"
+            android:background="#696969"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="13dip"
+                android:layout_weight="2"
+                android:text="@string/emergency_call"
+                android:textColor="#FFFFFF"
+                android:textSize="20dip"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/emergencyCall"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/input_number"
+                android:inputType="phone"
+                android:singleLine="true"
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/searchCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="15dip"
+                android:src="@drawable/search" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dip"
+            android:layout_marginLeft="10dip"
+            android:orientation="horizontal" >
+
+            <CheckBox
+                android:id="@+id/phoneNumberCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:checked="true"
+                android:text="@string/using_same_number"
+                android:textColor="#FFFFFF"
+                android:textSize="15dip"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/plus"
+                android:textColor="#FFFFFF"
+                android:textSize="38dip"
+                android:textStyle="bold"
+                android:id="@+id/addNumber"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="54dip"
+            android:background="#696969"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="13dip"
+                android:layout_weight="2"
+                android:text="@string/emergency_sms"
+                android:textColor="#FFFFFF"
+                android:textSize="20dip"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/emergencySms"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:hint="@string/input_number"
+                android:inputType="phone"
+                android:singleLine="true"
+                android:textColor="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/searchSms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="15dip"
+                android:src="@drawable/search" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dip"
+            android:orientation="vertical"
+            android:id="@+id/numbers"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="54dip"
+            android:layout_marginBottom="10dp"
+            android:background="#696969"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="13dip"
+                android:layout_weight="2"
+                android:text="@string/short_cut"
+                android:textColor="#FFFFFF"
+                android:textSize="20dip"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/shortCut"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="10dip"
+                android:layout_weight="1"
+                android:src="@drawable/toggle" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/black">
+    
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="8">
+        <include layout="@layout/emergency"/>
+        <include layout="@layout/reserve_call"/>
+        <include layout="@layout/setting"/>
+    </android.support.v4.view.ViewPager>
+    
+    <com.google.ads.AdView
+        android:id="@+id/ADMobAD"
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="2"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="5dip"
+        ads:refreshInterval="60"
+        ads:adSize="BANNER"
+        ads:adUnitId="a150935139d0e99"
+        ads:loadAdOnCreate="true"/>
+
+</LinearLayout>
