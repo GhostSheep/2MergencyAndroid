@@ -34,7 +34,7 @@ public class EmergencyView implements OnClickListener {
 	}
 	
 	/*
-     * Button - event ¿¬°á
+     * Button - event ì—°ê²°
      */
     public void initEvent(View v) {
     	v.findViewById(R.id.btnCall).setOnClickListener(this);
@@ -45,10 +45,7 @@ public class EmergencyView implements OnClickListener {
 	
     public void callEmergency() {
     	setting.Load(activity);
-    	
-        // ÀÀ±Þ ÀüÈ­ ¼³Á¤ÀÌ ÀÖ´Ù¸é ¹Ù·Î ÀüÈ­ °É±â ½Ãµµ
         if (true == setting.getShortCut()) {
-        	// ÁöÁ¤µÈ ÀÀ±Þ ÀüÈ­°¡ ¾øÀ¸¸é »óÈ² ¾Ë¸®°í logic ¹ÛÀ¸·Î ³ª°¨
         	if (null == setting.getEmergencyCall() || "" == setting.getEmergencyCall()) {
         		Toast.makeText(activity, activity.getString(R.string.no_emergency_number), Toast.LENGTH_SHORT).show();
         		return ;
@@ -59,14 +56,14 @@ public class EmergencyView implements OnClickListener {
     }
     
     /*
-     * ÀüÈ­°É±â Pop-up
+     * call Pop-up
      */
     private void makeCall() {
     	setting.Load(activity);
     	
     	AlertDialog.Builder builder = new AlertDialog.Builder(activity);
     	builder.setTitle(activity.getString(R.string.emergency_call));
-    	if (0 == language.compareTo("ko")) {  // ÇÑ±¹¾î ¿©ºÎ ÆÇ´ÜÇÏ¿© ¾î¼øÀ» º¯°æÇÏ¿© ¹®ÀåÀ» º¸¿©ÁÜ
+    	if (0 == language.compareTo("ko")) { // korean check
     		builder.setMessage(setting.getEmergencyCall()
     				+ activity.getString(R.string.do_you_want_to_call_emergency_call) + "?");
     	} else {
@@ -87,7 +84,7 @@ public class EmergencyView implements OnClickListener {
     }
     
     /*
-     * message Àü¼Û
+     * message send
      */
     private void makeSMS(View v) {
     	setting.Load(activity);

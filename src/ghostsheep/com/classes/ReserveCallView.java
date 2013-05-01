@@ -140,7 +140,7 @@ public class ReserveCallView implements OnClickListener {
 			}
 		});
     	
-    	// ¹üÀ§ÃÊ°úÇÏÁö ¸øÇÏµµ·Ï...
+    	// ë²”ìœ„ ì´ˆê³¼ check
     	numberEdit.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -167,14 +167,14 @@ public class ReserveCallView implements OnClickListener {
     }
     
     /*
-     * ÀÔ·Â ¹Ş´Â ºĞÀ» °è»êÇÏ¿© interval ¹İÈ¯
+     * ï¿½Ô·ï¿½ ï¿½Ş´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ interval ï¿½ï¿½È¯
      */
     private long getInterval(int interval) {
     	return interval * 60000;
     }
     
     /*
-     * ÀÔ·ÂµÈ ½Ã°£ÀÌ Áö³ª¸é ÀÚµ¿À¸·Î ÀüÈ­ & È­¸é¿¡ ½Ã°£ Ç¥Ãâ
+     * ì‹œê°„ check í•˜ì—¬ ì§€ì •ëœ ì‹œê°„ ë„ë‹¬ ì‹œ ì „í™” ì—°ê²°
      */
     private void startTimer(final long timeSpan) {
     	chronometer.setBase(SystemClock.elapsedRealtime());
@@ -189,7 +189,7 @@ public class ReserveCallView implements OnClickListener {
     }
     
     /*
-     * ÀüÈ­ °É±â
+     * ì „í™” ê±¸
      */
     private void makeCall() {
     	setting.Load(activity);

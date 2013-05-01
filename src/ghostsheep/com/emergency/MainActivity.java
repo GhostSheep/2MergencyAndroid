@@ -37,14 +37,14 @@ public class MainActivity extends Activity implements SensorEventListener {
 	private ViewPager viewPager;
 	private PagerAdapterClass pAdapterClass;
 	
-	// °¢ View º° ±â´ÉÀ» À§ÇÑ class
+	// í•„ìˆ˜ View
 	private EmergencyView emergencyView;
 	private ReserveCallView reserveCallView;
 	private SettingView settingView;
 	
 	private int prePosition;
 	
-	// Èçµé¸² ÀÌº¥Æ® Ã³¸®
+	// ì§„ë™ í™•ì¸ì„ ìœ„í•œ ì§€ìˆ˜
 	private long lastTime;
     private float speed;
     private float lastX;
@@ -58,7 +58,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	private SensorManager sensorManager;
     private Sensor accelerormeterSensor;
     
-    // siren Ã³¸®
+    // siren ë³€ìˆ˜
     private SoundPool soundPool;
     private int siren;
     private int streamID;
@@ -88,12 +88,10 @@ public class MainActivity extends Activity implements SensorEventListener {
 			public void onPageSelected(int arg0) {
 				// TODO Auto-generated method stub
 				
-				// SettingView ÀÏ °æ¿ì
 				if (2 == arg0) {
 					prePosition = arg0;
 				}
 				
-				// SettingView¿¡¼­ ´Ù¸¥ View ·Î ÀÌµ¿ ½Ã...
 				if (2 == prePosition && 2 != arg0 && null != settingView) {
 					settingView.SaveSetting();
 				}
@@ -159,7 +157,6 @@ public class MainActivity extends Activity implements SensorEventListener {
     	// TODO Auto-generated method stub
     	super.onPause();
     	
-    	// SettingView È­¸é¿¡¼­ AppÀ» ´İ¾Æµµ ¼³Á¤°ªÀ» ÀúÀåÇÏ°í EmergencyView·Î ÀÌµ¿
     	if (2 == viewPager.getCurrentItem() && null != settingView) {
     		settingView.SaveSetting();
     		viewPager.setCurrentItem(0);

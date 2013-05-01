@@ -33,7 +33,7 @@ public class Sms {
 	
 	public void sendMessage() {
 		
-		// ÇöÀç À§Ä¡ ÁÖ¼Ò¸¦ ¾ò±â À§ÇÑ »çÀü ÁØºñ
+		// ì§€ì—­ í™•ì¸ì„ ìœ„í•œ...
         locationManager = (LocationManager)act.getSystemService(Context.LOCATION_SERVICE);
         
         String provider = locationManager.getBestProvider(new Criteria(), true);
@@ -47,13 +47,13 @@ public class Sms {
 	}
 	
 	/*
-     * ÇöÀç Location Á¤º¸¸¦ ±â¹İÀ¸·Î ÁÖ¼Ò¸¦ ¾ò¾î¿È
+     * í˜„ì¬ ì§€ì—­ì„ ê¸°ë°˜ìœ¼ë¡œ ì£¼ì†Œë¥¼ ë½‘ì•„ëƒ„
      */
     private void getAddress(Location location) {
     	try {
     		String locationInfo = "";
     		
-    		// GPS È®ÀÎ
+    		// GPS check
 			if (location == null) {
 				Toast.makeText(act, act.getString(R.string.enable_location_service), Toast.LENGTH_SHORT).show();
 				return ;
@@ -77,7 +77,7 @@ public class Sms {
     }
     
     /*
-     * »óÈ²º° À§Ä¡¿Í »óÅÂ¸¦ ÇÕÃÄ¼­ Message Á¦ÀÛ
+     * ìƒí™©ë³„ ì£¼ì†Œ ë‚´ìš©ì„ í¬í•¨í•œ message ìƒì„±
      */
     private String makeMessage(String provider) {
     	String message;
@@ -103,7 +103,7 @@ public class Sms {
     }
     
     /*
-     * Á¦ÀÛµÈ Message ¸¦ SMS·Î Àü¼Û
+     * ì§€ì •ëœ ë²ˆí˜¸ë¡œ ë§Œë“¤ì–´ì§„ message ì „ì†¡
      */
     private void sendSMS(String message) {
     	String url = setting.getEmergencySms();

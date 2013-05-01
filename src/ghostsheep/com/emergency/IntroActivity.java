@@ -28,9 +28,6 @@ public class IntroActivity extends Activity {
      	}, 1000);
     }
     
-    /*
-     * 지정 시간 이후 Main Page 이동(IntroActivity는 종료)
-     */
     private void moveMainActivity() {
     	Intent intent = new Intent(this, MainActivity.class);
         

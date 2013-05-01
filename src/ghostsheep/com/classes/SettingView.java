@@ -61,7 +61,7 @@ public class SettingView implements OnClickListener {
     }
 	
     /*
-     * ∞¢ View √ ±‚»≠
+     * View init
      */
     public void initView(View view) {
     	if (null == setting) {
@@ -147,7 +147,7 @@ public class SettingView implements OnClickListener {
     	}
 	}
     /*
-     * Event √ ±‚»≠(ø¨∞·)
+     * Event connection
      */
     public void initEvent(View view) {
     	view.findViewById(R.id.searchCall).setOnClickListener(this);
@@ -197,7 +197,7 @@ public class SettingView implements OnClickListener {
     }
     
     /*
-     * º≥¡§ ¿˙¿Â
+     * ÏÑ§Ï†ï Ï†ÄÏû•
      */
     public void SaveSetting() {
     	if(null == setting) {
@@ -271,7 +271,7 @@ public class SettingView implements OnClickListener {
     
     private void addNumber() {
     	if (5 < controlNum) {
-    		Toast.makeText(activity, "√ﬂ∞° ¿¸»≠π¯»£¥¬ √÷¥Î 5∞≥±Ó¡ˆ∏∏ ¿˙¿Â«“ ºˆ ¿÷Ω¿¥œ¥Ÿ.", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(activity, "Ï∂îÍ∞Ä Î≤àÌò∏Îäî ÏµúÎåÄ 5Í∞úÍπåÏßÄÎßå Ï†ÄÏû•Ìï† Ïàò ÏûàÏäµÎãàÎã§.", Toast.LENGTH_SHORT).show();
     		return;
     	}
     	LinearLayout layout = new LinearLayout(activity);
