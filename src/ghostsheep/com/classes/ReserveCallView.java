@@ -30,6 +30,7 @@ public class ReserveCallView implements OnClickListener {
 	private EditText numberEdit;
 	private int maxrange = 60, minrange = 1, value = 1;
 	
+	public boolean chronometerRunning = false;
 	private Handler m_Handler = new Handler();
 	
 	public ReserveCallView(Activity activity) {
@@ -167,7 +168,7 @@ public class ReserveCallView implements OnClickListener {
     }
     
     /*
-     * �Է� �޴� ���� ����Ͽ� interval ��ȯ
+     * interval 계산
      */
     private long getInterval(int interval) {
     	return interval * 60000;
@@ -179,6 +180,7 @@ public class ReserveCallView implements OnClickListener {
     private void startTimer(final long timeSpan) {
     	chronometer.setBase(SystemClock.elapsedRealtime());
     	chronometer.start();
+    	chronometerRunning = true;
     	
      	m_Handler.postDelayed(new Runnable() {
     		@Override
@@ -189,7 +191,7 @@ public class ReserveCallView implements OnClickListener {
     }
     
     /*
-     * 전화 걸
+     * 전화 걸기
      */
     private void makeCall() {
     	setting.Load(activity);
@@ -198,6 +200,7 @@ public class ReserveCallView implements OnClickListener {
     	activity.startActivity(intent);
 		
 		chronometer.stop();
+		chronometerRunning = false;
 		chronometer.setBase(SystemClock.elapsedRealtime());
     	m_Handler.removeMessages(0);
     }
@@ -207,6 +210,7 @@ public class ReserveCallView implements OnClickListener {
      */
     private void stopTimer() {
     	chronometer.stop();
+    	chronometerRunning = false;
     	m_Handler.removeMessages(0);
     	
     }

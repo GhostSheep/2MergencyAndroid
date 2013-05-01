@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	
 	private int prePosition;
 	
-	// 진동 확인을 위한 지수
+	// 진동 확인을 위한 변수
 	private long lastTime;
     private float speed;
     private float lastX;
@@ -125,7 +125,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     @Override
     protected void onStart() {
     	if (2 != viewPager.getCurrentItem()) {
-    		emergencyView.callEmergency();
+    		if (reserveCallView.chronometerRunning == false) {
+    			emergencyView.callEmergency();
+    		}
     	}
     	
     	if (accelerormeterSensor != null) {
@@ -149,7 +151,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     	// TODO Auto-generated method stub
     	super.onDestroy();
     	
-    	adView.destroy();
+    	if (adView != null) {
+    		adView.destroy();
+    	}
     }
     
     @Override
@@ -274,7 +278,7 @@ public class MainActivity extends Activity implements SensorEventListener {
                 speed = Math.abs(x + y + z - lastX - lastY - lastZ) /
                         gabOfTime * 10000;
 
-                
+                // 흔들림 감지 시
                 if (speed > SHAKE_THRESHOLD) {
                     cnt++;
                     if (cnt > 4) {
