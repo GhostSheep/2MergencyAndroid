@@ -4,7 +4,7 @@ import ghostsheep.com.emergency.R;
 
 import java.io.Serializable;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 
 @SuppressWarnings("serial")
@@ -20,11 +20,11 @@ public class Setting implements Serializable {
 	private String addedNumber4;
 	private String addedNumber5;
 	
-	public Setting(Activity act) {
+	public Setting(Context context) {
 		pushTarget = "";
 		shortCut = false;
-		emergencyCall = act.getString(R.string.emergency_number);
-		emergencySms = act.getString(R.string.emergency_number);
+		emergencyCall = context.getString(R.string.emergency_number);
+		emergencySms = context.getString(R.string.emergency_number);
 		addedNumber1 = "";
 		addedNumber2 = "";
 		addedNumber3 = "";
@@ -96,8 +96,8 @@ public class Setting implements Serializable {
 	 * Setting info save
 	 */
 	@SuppressWarnings("static-access")
-	public void Save(Activity activity) {
-		SharedPreferences preferences = activity.getSharedPreferences("Pref", activity.MODE_PRIVATE);
+	public void Save(Context context) {
+		SharedPreferences preferences = context.getSharedPreferences("Pref", context.MODE_PRIVATE);
 		SharedPreferences.Editor prefEdit = preferences.edit();
 		
 		prefEdit.putString("pushTarget", getPushTarget());
@@ -117,8 +117,8 @@ public class Setting implements Serializable {
 	 * Setting info load
 	 */
 	@SuppressWarnings("static-access")
-	public void Load(Activity activity) {
-		SharedPreferences preferences = activity.getSharedPreferences("Pref", activity.MODE_PRIVATE);
+	public void Load(Context context) {
+		SharedPreferences preferences = context.getSharedPreferences("Pref", context.MODE_PRIVATE);
 		
 		setPushTarget(preferences.getString("pushTarget", pushTarget));
 		setShortCut(preferences.getBoolean("shortCut", shortCut));

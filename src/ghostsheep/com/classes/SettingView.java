@@ -1,10 +1,12 @@
 package ghostsheep.com.classes;
 
-import java.util.ArrayList;
-
 import ghostsheep.com.emergency.R;
 import ghostsheep.com.emergency.setting.Setting;
+
+import java.util.ArrayList;
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -28,7 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class SettingView implements OnClickListener {
-	private Activity activity;
+	private Context context;
 	private View view;
 	
 	public static final int PICK_CONTACT = 1;
@@ -46,8 +48,8 @@ public class SettingView implements OnClickListener {
 	private ImageView shortCut;
 	private LinearLayout numbers;
 	
-	public SettingView(Activity activity) {
-		this.activity = activity;
+	public SettingView(Context context) {
+		this.context = context;
 	}
 	
     public void setResult(int requestCode, int resultCode, Intent data) {
@@ -65,9 +67,9 @@ public class SettingView implements OnClickListener {
      */
     public void initView(View view) {
     	if (null == setting) {
-        	setting = new Setting(activity);
+        	setting = new Setting(context);
         }
-        setting.Load(activity);
+        setting.Load(context);
         
         this.view = view;
         
@@ -201,7 +203,7 @@ public class SettingView implements OnClickListener {
      */
     public void SaveSetting() {
     	if(null == setting) {
-    		setting = new Setting(activity);
+    		setting = new Setting(context);
     	}
     	
     	setting.setEmergencyCall(emergencyCall.getText().toString());
@@ -217,18 +219,18 @@ public class SettingView implements OnClickListener {
     		}
     	}
     	
-    	setting.Save(activity);
+    	setting.Save(context);
     }
     
     private void getNumber() {
     	Intent contact_picker = new Intent(Intent.ACTION_PICK);
     	contact_picker.setType(ContactsContract.Contacts.CONTENT_TYPE);
-    	activity.startActivityForResult(contact_picker, PICK_CONTACT);
+    	((Activity)context).startActivityForResult(contact_picker, PICK_CONTACT);
     }
     
     private void contactPick(Uri dataUri) {
     	String number = null;
-    	Cursor cursor = activity.getContentResolver().query(dataUri, null, null, null, null);
+    	Cursor cursor = context.getContentResolver().query(dataUri, null, null, null, null);
     	
 		while(cursor.moveToNext()) {
 			String id = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
@@ -236,7 +238,7 @@ public class SettingView implements OnClickListener {
 			
 			if (true == hasPhoneNumber.equalsIgnoreCase("1")) {
 				
-				Cursor phone = activity.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+				Cursor phone = context.getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
 						null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + id, null, null);
 				String mobile = "";
 				String other = "";
@@ -271,10 +273,10 @@ public class SettingView implements OnClickListener {
     
     private void addNumber() {
     	if (5 < controlNum) {
-    		Toast.makeText(activity, "추가 번호는 최대 5개까지만 저장할 수 있습니다.", Toast.LENGTH_SHORT).show();
+    		Toast.makeText(context, "추가 번호는 최대 5개까지만 저장할 수 있습니다.", Toast.LENGTH_SHORT).show();
     		return;
     	}
-    	LinearLayout layout = new LinearLayout(activity);
+    	LinearLayout layout = new LinearLayout(context);
     	LinearLayout.LayoutParams lParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     	lParams.height = PixelfromDP(54);
     	lParams.topMargin = PixelfromDP(5);
@@ -282,17 +284,17 @@ public class SettingView implements OnClickListener {
     	layout.setBackgroundColor(Color.parseColor("#696969"));
     	layout.setOrientation(android.widget.LinearLayout.HORIZONTAL);
     	
-    	TextView text = new TextView(activity);
+    	TextView text = new TextView(context);
     	LinearLayout.LayoutParams tParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
     	tParams.weight = 2;
     	tParams.leftMargin = PixelfromDP(10);
     	tParams.topMargin = PixelfromDP(13);
     	text.setLayoutParams(tParams);
-    	text.setTextAppearance(activity, R.style.textViewStyle);
-    	text.setText(activity.getString(R.string.added_number));
+    	text.setTextAppearance(context, R.style.textViewStyle);
+    	text.setText(context.getString(R.string.added_number));
     	layout.addView(text);
     	
-    	EditText edit = new EditText(activity);
+    	EditText edit = new EditText(context);
     	LinearLayout.LayoutParams eParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
     	eParams.weight = 1;
     	edit.setLayoutParams(eParams);
@@ -304,7 +306,7 @@ public class SettingView implements OnClickListener {
     	edit.setId(controlNum);
     	layout.addView(edit);
     	
-    	ImageView image = new ImageView(activity);
+    	ImageView image = new ImageView(context);
     	LinearLayout.LayoutParams iParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
     	iParams.rightMargin = PixelfromDP(10);
     	iParams.topMargin = PixelfromDP(15);
@@ -322,6 +324,6 @@ public class SettingView implements OnClickListener {
     }
     
     private int PixelfromDP(int DP) {
-    	return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DP, activity.getResources().getDisplayMetrics());
+    	return (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, DP, context.getResources().getDisplayMetrics());
     }
 }

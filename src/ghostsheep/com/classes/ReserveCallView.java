@@ -2,7 +2,7 @@ package ghostsheep.com.classes;
 
 import ghostsheep.com.emergency.R;
 import ghostsheep.com.emergency.setting.Setting;
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -19,7 +19,7 @@ import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class ReserveCallView implements OnClickListener {
-	private Activity activity;
+	private Context context;
 	
 	private Setting setting = null;
 	private RadioGroup easyTime;
@@ -33,15 +33,15 @@ public class ReserveCallView implements OnClickListener {
 	public boolean chronometerRunning = false;
 	private Handler m_Handler = new Handler();
 	
-	public ReserveCallView(Activity activity) {
-		this.activity = activity;
+	public ReserveCallView(Context context) {
+		this.context = context;
 	}
 	
 	public void initView(View view) {
 		if (null == setting) {
-        	setting = new Setting(activity);
+        	setting = new Setting(context);
         }
-        setting.Load(activity);
+        setting.Load(context);
         
         easyTime = (RadioGroup)view.findViewById(R.id.easy_time);
     	chronometer = (Chronometer)view.findViewById(R.id.chronometer);
@@ -194,10 +194,10 @@ public class ReserveCallView implements OnClickListener {
      * 전화 걸기
      */
     private void makeCall() {
-    	setting.Load(activity);
+    	setting.Load(context);
     	
     	Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + setting.getEmergencyCall()));
-    	activity.startActivity(intent);
+    	context.startActivity(intent);
 		
 		chronometer.stop();
 		chronometerRunning = false;

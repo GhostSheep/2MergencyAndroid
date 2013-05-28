@@ -3,8 +3,8 @@ package ghostsheep.com.classes;
 import ghostsheep.com.emergency.R;
 import ghostsheep.com.emergency.setting.Setting;
 import ghostsheep.com.emergency.sms.Sms;
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,23 +14,23 @@ import android.widget.Toast;
 
 public class EmergencyView implements OnClickListener {
 
-	private Activity activity;
+	private Context context;
 	private Setting setting = null;
 	private String language;
 	
-	public EmergencyView(Activity activity) {
-		this.activity = activity;
+	public EmergencyView(Context context) {
+		this.context = context;
 		
 		initView();
 	}
 	
 	private void initView() {
-		language = activity.getResources().getConfiguration().locale.getLanguage();
+		language = context.getResources().getConfiguration().locale.getLanguage();
         
         if (null == setting) {
-        	setting = new Setting(activity);
+        	setting = new Setting(context);
         }
-        setting.Load(activity);
+        setting.Load(context);
 	}
 	
 	/*
@@ -44,10 +44,10 @@ public class EmergencyView implements OnClickListener {
     }
 	
     public void callEmergency() {
-    	setting.Load(activity);
+    	setting.Load(context);
         if (true == setting.getShortCut()) {
         	if (null == setting.getEmergencyCall() || "" == setting.getEmergencyCall()) {
-        		Toast.makeText(activity, activity.getString(R.string.no_emergency_number), Toast.LENGTH_SHORT).show();
+        		Toast.makeText(context, context.getString(R.string.no_emergency_number), Toast.LENGTH_SHORT).show();
         		return ;
         	}
         	
@@ -59,27 +59,27 @@ public class EmergencyView implements OnClickListener {
      * call Pop-up
      */
     private void makeCall() {
-    	setting.Load(activity);
+    	setting.Load(context);
     	
-    	AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-    	builder.setTitle(activity.getString(R.string.emergency_call));
+    	AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    	builder.setTitle(context.getString(R.string.emergency_call));
     	if (0 == language.compareTo("ko")) { // korean check
     		builder.setMessage(setting.getEmergencyCall()
-    				+ activity.getString(R.string.do_you_want_to_call_emergency_call) + "?");
+    				+ context.getString(R.string.do_you_want_to_call_emergency_call) + "?");
     	} else {
-    		builder.setMessage(activity.getString(R.string.do_you_want_to_call_emergency_call)
+    		builder.setMessage(context.getString(R.string.do_you_want_to_call_emergency_call)
     				+ " " + setting.getEmergencyCall() + "?");
     	}
-    	builder.setPositiveButton(activity.getString(R.string.call), new DialogInterface.OnClickListener() {
+    	builder.setPositiveButton(context.getString(R.string.call), new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + setting.getEmergencyCall()));
-				activity.startActivity(intent);
+				context.startActivity(intent);
 			}
 		});
-    	builder.setNegativeButton(activity.getString(R.string.cancel), null);
+    	builder.setNegativeButton(context.getString(R.string.cancel), null);
 		builder.show();
     }
     
@@ -87,9 +87,9 @@ public class EmergencyView implements OnClickListener {
      * message send
      */
     private void makeSMS(View v) {
-    	setting.Load(activity);
+    	setting.Load(context);
     	
-    	Sms sms = new Sms(activity, setting, v.getId());
+    	Sms sms = new Sms(context, setting, v.getId());
     	sms.sendMessage();
     }
     

@@ -119,7 +119,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     
     private void initSound() {
     	soundPool = new SoundPool( 5, AudioManager.STREAM_MUSIC, 0 );
-    	siren = soundPool.load( this, R.raw.siren, 1 );
+    	siren = soundPool.load( getApplicationContext(), R.raw.siren, 1 );
     }
     
     @Override
@@ -219,7 +219,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
     	switch(keyCode) {
     	case KeyEvent.KEYCODE_BACK:
-    		AlertDialog.Builder alert = new Builder(this);
+    		AlertDialog.Builder alert = new Builder(getApplicationContext());
 			alert.setMessage(getString(R.string.exitApp));
 			alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 				
@@ -292,7 +292,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	                    	streamID = soundPool.play( siren, 1f, 1f, 0, -1, 1f );
 	                    	cnt = 0;
 	                    	
-	                    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+	                    	AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
 	                    	builder.setTitle(getString(R.string.turn_off_a_sound));
 	                    	builder.setNegativeButton(getString(R.string.stop), new DialogInterface.OnClickListener() {
 								

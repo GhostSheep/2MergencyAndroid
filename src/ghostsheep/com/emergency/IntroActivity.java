@@ -34,4 +34,13 @@ public class IntroActivity extends Activity {
         startActivity(intent);
         finish();
     }
+    
+    @Override
+    protected void onDestroy() {
+    	
+    	if (m_Handler != null) {
+    		m_Handler = null;
+    	}
+    	super.onDestroy();
+    }
 }

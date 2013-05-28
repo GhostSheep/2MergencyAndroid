@@ -6,7 +6,6 @@ import ghostsheep.com.emergency.setting.Setting;
 import java.util.List;
 import java.util.Locale;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -18,15 +17,15 @@ import android.net.Uri;
 import android.widget.Toast;
 
 public class Sms {
-	private Activity act;
+	private Context context;
 	private Setting setting;
 	private int viewId;
 	
 	private LocationManager locationManager;
 	private String locationInfo;
 	
-	public Sms(Activity act, Setting setting, int viewID) {
-		this.act = act;
+	public Sms(Context context, Setting setting, int viewID) {
+		this.context = context;
 		this.setting = setting;
 		this.viewId = viewID;
 	}
@@ -34,7 +33,7 @@ public class Sms {
 	public void sendMessage() {
 		
 		// 지역 확인을 위한...
-        locationManager = (LocationManager)act.getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
         
         String provider = locationManager.getBestProvider(new Criteria(), true);
 	    Location location = locationManager.getLastKnownLocation(provider);
@@ -55,11 +54,11 @@ public class Sms {
     		
     		// GPS check
 			if (location == null) {
-				Toast.makeText(act, act.getString(R.string.enable_location_service), Toast.LENGTH_SHORT).show();
+				Toast.makeText(context, context.getString(R.string.enable_location_service), Toast.LENGTH_SHORT).show();
 				return ;
 			}
 			
-			Geocoder geo = new Geocoder(act.getApplicationContext(), Locale.getDefault());
+			Geocoder geo = new Geocoder(context, Locale.getDefault());
 	        List<Address> addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 	        if (addresses.isEmpty()) {
 	        	locationInfo = "Waiting for Location";
@@ -87,16 +86,16 @@ public class Sms {
     	}
     	
     	if (0 != provider.compareTo("gps")){
-    		locationInfo += "/" + act.getString(R.string.not_gps_provider);
+    		locationInfo += "/" + context.getString(R.string.not_gps_provider);
     	}
     	if (R.id.btnRape == viewId) { // Rape
-    		message = act.getString(R.string.rape_message) + "/" + locationInfo;
+    		message = context.getString(R.string.rape_message) + "/" + locationInfo;
     	} else if (R.id.btnViolence == viewId) {  // Violence
-    		message = act.getString(R.string.violence_message) + "/" + locationInfo;
+    		message = context.getString(R.string.violence_message) + "/" + locationInfo;
     	} else if (R.id.btnKidnap ==viewId) {
-    		message = act.getString(R.string.kidnap_message) + "/" + locationInfo;
+    		message = context.getString(R.string.kidnap_message) + "/" + locationInfo;
     	} else {  // Kidnap
-    		message = act.getString(R.string.violence_message) + "/" + locationInfo;
+    		message = context.getString(R.string.violence_message) + "/" + locationInfo;
     	}
     	
     	return message;
@@ -116,6 +115,6 @@ public class Sms {
     	Intent sendIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("sms:" + url));
     	sendIntent.putExtra("address", setting.getEmergencySms());
     	sendIntent.putExtra("sms_body", message);
-    	act.startActivity(sendIntent);
+    	context.startActivity(sendIntent);
     }
 }
