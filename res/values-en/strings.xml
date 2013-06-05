@@ -14,7 +14,7 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="emergency_sms">Emergency SMS</string>
-    <string name="added_number">Added Number</string>
+    <string name="added_number">Add Numbers</string>
     <string name="rape">Rape</string>
     <string name="kidnap">Kidnap</string>
     <string name="violence">Violence</string>
@@ -24,12 +24,12 @@
     <string name="rape_message">I am in danger of being RAPED at</string>
     <string name="violence_message">I am in danger of being ATTACKED at</string>
     <string name="enable_location_service">Please enable Location Service on the Phone.</string>
-    <string name="no_emergency_number">Specified emergency number does not exist. Please enter a phone number.</string>
+    <string name="no_emergency_number">Specified emergency numbers does not exist. Please enter a phone numbers.</string>
     <string name="find">Find</string>
     <string name="not_gps_provider">Location information is inaccurate because GPS provider cannot used.</string>
-    <string name="input_number">Enter Phone numbers</string>
+    <string name="input_number">Enter numbers</string>
     <string name="short_cut">Short Cut</string>
-    <string name="using_same_number">Using the same emergency phone numbers</string>
+    <string name="using_same_number">Using the same emergency numbers</string>
     <string name="message_transfer_is_complete">Message transfer is complete</string>
     <string name="start">Start</string>
     <string name="min">min</string>

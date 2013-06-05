@@ -25,7 +25,7 @@
                 android:layout_weight="2"
                 android:text="@string/emergency_call"
                 android:textColor="#FFFFFF"
-                android:textSize="20dip"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -61,7 +61,7 @@
                 android:checked="true"
                 android:text="@string/using_same_number"
                 android:textColor="#FFFFFF"
-                android:textSize="15dip"
+                android:textSize="15sp"
                 android:textStyle="bold" />
             <TextView
                 android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
                 android:layout_weight="1"
                 android:text="@string/plus"
                 android:textColor="#FFFFFF"
-                android:textSize="38dip"
+                android:textSize="38sp"
                 android:textStyle="bold"
                 android:id="@+id/addNumber"/>
         </LinearLayout>
@@ -88,7 +88,7 @@
                 android:layout_weight="2"
                 android:text="@string/emergency_sms"
                 android:textColor="#FFFFFF"
-                android:textSize="20dip"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <EditText
@@ -132,7 +132,7 @@
                 android:layout_weight="2"
                 android:text="@string/short_cut"
                 android:textColor="#FFFFFF"
-                android:textSize="20dip"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <ImageView

@@ -219,7 +219,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
     	switch(keyCode) {
     	case KeyEvent.KEYCODE_BACK:
-    		AlertDialog.Builder alert = new Builder(getApplicationContext());
+    		AlertDialog.Builder alert = new Builder(MainActivity.this);
 			alert.setMessage(getString(R.string.exitApp));
 			alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
 				
