@@ -122,48 +122,48 @@ containing a value of this type.
         public static final int siren=0x7f040000;
     }
     public static final class string {
-        public static final int added_number=0x7f050025;
+        public static final int added_number=0x7f05000e;
         public static final int app_name=0x7f050000;
         public static final int call=0x7f05000a;
-        public static final int cancel=0x7f05000b;
+        public static final int cancel=0x7f05000c;
         public static final int do_you_want_to_call_emergency_call=0x7f050009;
         public static final int emergency_call=0x7f050008;
         public static final int emergency_number=0x7f050007;
-        public static final int emergency_sms=0x7f05000c;
-        public static final int enable_location_service=0x7f050015;
+        public static final int emergency_sms=0x7f05000d;
+        public static final int enable_location_service=0x7f050017;
         public static final int exitApp=0x7f050027;
-        public static final int find=0x7f050017;
-        public static final int input_number=0x7f050019;
-        public static final int kidnap=0x7f05000e;
-        public static final int kidnap_message=0x7f050012;
+        public static final int find=0x7f050019;
+        public static final int input_number=0x7f05001b;
+        public static final int kidnap=0x7f050010;
+        public static final int kidnap_message=0x7f050014;
         public static final int menu_main=0x7f050001;
         public static final int menu_reserv_call=0x7f050003;
         public static final int menu_settings=0x7f050002;
-        public static final int message_transfer_is_complete=0x7f05001c;
-        public static final int min=0x7f050026;
-        public static final int min10=0x7f05001f;
-        public static final int min20=0x7f050020;
-        public static final int min5=0x7f05001e;
-        public static final int minus=0x7f050023;
-        public static final int no_emergency_number=0x7f050016;
-        public static final int not_gps_provider=0x7f050018;
-        public static final int ok=0x7f050024;
-        public static final int plus=0x7f050022;
-        public static final int rape=0x7f05000d;
-        public static final int rape_message=0x7f050013;
-        public static final int send=0x7f050011;
-        public static final int set_timer=0x7f050021;
-        public static final int short_cut=0x7f05001a;
-        public static final int start=0x7f05001d;
+        public static final int message_transfer_is_complete=0x7f05001e;
+        public static final int min=0x7f050020;
+        public static final int min10=0x7f050022;
+        public static final int min20=0x7f050023;
+        public static final int min5=0x7f050021;
+        public static final int minus=0x7f050026;
+        public static final int no_emergency_number=0x7f050018;
+        public static final int not_gps_provider=0x7f05001a;
+        public static final int ok=0x7f05000b;
+        public static final int plus=0x7f050025;
+        public static final int rape=0x7f05000f;
+        public static final int rape_message=0x7f050015;
+        public static final int send=0x7f050013;
+        public static final int set_timer=0x7f050024;
+        public static final int short_cut=0x7f05001c;
+        public static final int start=0x7f05001f;
         public static final int stop=0x7f050029;
         public static final int title_activity_intro=0x7f050004;
         public static final int title_activity_main=0x7f050005;
         public static final int title_activity_setting=0x7f050006;
-        public static final int title_activity_sms=0x7f050010;
+        public static final int title_activity_sms=0x7f050012;
         public static final int turn_off_a_sound=0x7f050028;
-        public static final int using_same_number=0x7f05001b;
-        public static final int violence=0x7f05000f;
-        public static final int violence_message=0x7f050014;
+        public static final int using_same_number=0x7f05001d;
+        public static final int violence=0x7f050011;
+        public static final int violence_message=0x7f050016;
     }
     public static final class style {
         public static final int AppTheme=0x7f060000;
@@ -205,7 +205,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:adUnitId
+          @attr name ghostsheep.com.emergency:adUnitId
         */
         public static final int com_google_ads_AdView_adUnitId = 0;
         /**
@@ -220,7 +220,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:backgroundColor
+          @attr name ghostsheep.com.emergency:backgroundColor
         */
         public static final int com_google_ads_AdView_backgroundColor = 1;
         /**
@@ -234,7 +234,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:keywords
+          @attr name ghostsheep.com.emergency:keywords
         */
         public static final int com_google_ads_AdView_keywords = 4;
         /**
@@ -249,7 +249,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:primaryTextColor
+          @attr name ghostsheep.com.emergency:primaryTextColor
         */
         public static final int com_google_ads_AdView_primaryTextColor = 2;
         /**
@@ -263,7 +263,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:refreshInterval
+          @attr name ghostsheep.com.emergency:refreshInterval
         */
         public static final int com_google_ads_AdView_refreshInterval = 5;
         /**
@@ -278,7 +278,7 @@ containing a value of this type.
 theme attribute (in the form
 "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
 containing a value of this type.
-          @attr name android:secondaryTextColor
+          @attr name ghostsheep.com.emergency:secondaryTextColor
         */
         public static final int com_google_ads_AdView_secondaryTextColor = 3;
     };

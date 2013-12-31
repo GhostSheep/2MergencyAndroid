@@ -1,6 +1,6 @@
 package ghostsheep.com.emergency;
 
-
+import ghostsheep.com.common.Constant;
 import ghostsheep.com.classes.EmergencyView;
 import ghostsheep.com.classes.ReserveCallView;
 import ghostsheep.com.classes.SettingView;
@@ -88,11 +88,13 @@ public class MainActivity extends Activity implements SensorEventListener {
 			public void onPageSelected(int arg0) {
 				// TODO Auto-generated method stub
 				
-				if (2 == arg0) {
+				if (Constant.settingView == arg0) {
 					prePosition = arg0;
 				}
 				
-				if (2 == prePosition && 2 != arg0 && null != settingView) {
+				if (Constant.settingView == prePosition &&
+					Constant.settingView != arg0 &&
+					null != settingView) {
 					settingView.SaveSetting();
 				}
 			}
@@ -124,7 +126,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     
     @Override
     protected void onStart() {
-    	if (2 != viewPager.getCurrentItem()) {
+    	if (Constant.settingView != viewPager.getCurrentItem()) {
     		if (reserveCallView.chronometerRunning == false) {
     			emergencyView.callEmergency();
     		}
@@ -161,9 +163,9 @@ public class MainActivity extends Activity implements SensorEventListener {
     	// TODO Auto-generated method stub
     	super.onPause();
     	
-    	if (2 == viewPager.getCurrentItem() && null != settingView) {
+    	if (Constant.settingView == viewPager.getCurrentItem() && null != settingView) {
     		settingView.SaveSetting();
-    		viewPager.setCurrentItem(0);
+    		viewPager.setCurrentItem(Constant.emergencyView);
     	}
     	
     	adView.stopLoading();
@@ -174,6 +176,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     	// TODO Auto-generated method stub
     	super.onResume();
     	
+    	// 광고 처리
     	AdRequest request = new AdRequest();
     	request.addTestDevice(AdRequest.TEST_EMULATOR);
     	request.addTestDevice("6FE8400FADAD3AE9046E42E6A06D9470");
@@ -192,19 +195,19 @@ public class MainActivity extends Activity implements SensorEventListener {
 		
 		case R.id.menu_main:
 		{
-			viewPager.setCurrentItem(0);
+			viewPager.setCurrentItem(Constant.emergencyView);
 			break;
 		}
 		
 		case R.id.menu_reserv_call:
 		{
-			viewPager.setCurrentItem(1);
+			viewPager.setCurrentItem(Constant.reserveCallView);
 			break;
 		}
 		
 		case R.id.menu_settings:
 		{
-			viewPager.setCurrentItem(2);
+			viewPager.setCurrentItem(Constant.settingView);
 			break;
 		}
 		
@@ -251,7 +254,7 @@ public class MainActivity extends Activity implements SensorEventListener {
     	
     	if (null != settingView) {
     		settingView.setResult(requestCode, resultCode, data);
-    		viewPager.setCurrentItem(2);
+    		viewPager.setCurrentItem(Constant.settingView);
     	}
     }
     
@@ -327,17 +330,17 @@ private class PagerAdapterClass extends PagerAdapter {
 	     
 	    @Override
 	    public int getCount() {
-	        return 3;
+	        return Constant.pageConut;
 	    }
 
 	    @Override
 	    public Object instantiateItem(View pager, int position) {
 	        View v = null;
-	        if (0 == position) {
+	        if (Constant.emergencyView == position) {
 	            v = mInflater.inflate(R.layout.emergency, null);
 	            emergencyView.initEvent(v);
 	            
-	        } else if (1 == position) {
+	        } else if (Constant.reserveCallView == position) {
 	        	v = mInflater.inflate(R.layout.reserve_call, null);
 	        	reserveCallView.initView(v);
 	        	reserveCallView.initEvent();
