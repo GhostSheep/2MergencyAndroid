@@ -15,6 +15,8 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-feature android:required="true" android:glEsVersion="0x00020000"/>
+    <permission android:name="ghostsheep.com.emergency.permission.MAPS_RECEIVE"></permission>
     
 
     <application
@@ -41,6 +43,7 @@
         <activity
             android:name="com.google.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyC_SiSvcZCg4Y-JS9GWgl-c24fw9lLINUk"/>
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import ghostsheep.com.common.Constant;
 import ghostsheep.com.classes.EmergencyView;
 import ghostsheep.com.classes.ReserveCallView;
 import ghostsheep.com.classes.SettingView;
+import ghostsheep.com.classes.WhereAmIView;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -27,12 +28,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdView;
-
 public class MainActivity extends Activity implements SensorEventListener {
-
-	private AdView adView;  // Banner
 	
 	private ViewPager viewPager;
 	private PagerAdapterClass pAdapterClass;
@@ -40,6 +36,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	// 필수 View
 	private EmergencyView emergencyView;
 	private ReserveCallView reserveCallView;
+	private WhereAmIView whereAmIView;
 	private SettingView settingView;
 	
 	private int prePosition;
@@ -112,10 +109,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 		});
         //---> ViewPage
         
-        adView = (AdView)findViewById(R.id.ADMobAD);
-        
         emergencyView = new EmergencyView(this);
         reserveCallView = new ReserveCallView(this);
+        whereAmIView = new WhereAmIView(this);
         settingView = new SettingView(this);
     }
     
@@ -149,16 +145,6 @@ public class MainActivity extends Activity implements SensorEventListener {
     }
     
     @Override
-    protected void onDestroy() {
-    	// TODO Auto-generated method stub
-    	super.onDestroy();
-    	
-    	if (adView != null) {
-    		adView.destroy();
-    	}
-    }
-    
-    @Override
     protected void onPause() {
     	// TODO Auto-generated method stub
     	super.onPause();
@@ -167,20 +153,6 @@ public class MainActivity extends Activity implements SensorEventListener {
     		settingView.SaveSetting();
     		viewPager.setCurrentItem(Constant.emergencyView);
     	}
-    	
-    	adView.stopLoading();
-    }
-    
-    @Override
-    protected void onResume() {
-    	// TODO Auto-generated method stub
-    	super.onResume();
-    	
-    	// 광고 처리
-    	AdRequest request = new AdRequest();
-    	request.addTestDevice(AdRequest.TEST_EMULATOR);
-    	request.addTestDevice("6FE8400FADAD3AE9046E42E6A06D9470");
-    	adView.loadAd(request);
     }
     
     @Override
@@ -205,6 +177,11 @@ public class MainActivity extends Activity implements SensorEventListener {
 			break;
 		}
 		
+		case R.id.menu_where_am_i:
+		{
+			viewPager.setCurrentItem(Constant.whereAmIView);
+			break;
+		}
 		case R.id.menu_settings:
 		{
 			viewPager.setCurrentItem(Constant.settingView);
@@ -344,6 +321,10 @@ private class PagerAdapterClass extends PagerAdapter {
 	        	v = mInflater.inflate(R.layout.reserve_call, null);
 	        	reserveCallView.initView(v);
 	        	reserveCallView.initEvent();
+	        } else if (Constant.whereAmIView == position) {
+	        	v = mInflater.inflate(R.layout.where_am_i, null);
+	        	whereAmIView.initView(v);
+	        	whereAmIView.initEvent();
 	        }
 	        else {
 	            v = mInflater.inflate(R.layout.setting, null);

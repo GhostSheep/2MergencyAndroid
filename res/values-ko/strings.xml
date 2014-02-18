@@ -4,6 +4,7 @@
     <string name="menu_main">처음으로</string>
     <string name="menu_settings">설정</string>
     <string name="menu_reserv_call">예약 전화</string>
+    <string name="menu_where_am_i">내 위치 찾기</string>
     <string name="title_activity_intro">IntroActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_setting">SettingActivity</string>

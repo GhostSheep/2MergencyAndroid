@@ -8,9 +8,13 @@
         android:title="@string/menu_reserv_call"
         android:icon="@drawable/phone"
         android:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/menu_where_am_i"
+        android:title="@string/menu_where_am_i"
+        android:showAsAction="ifRoom|withText"/>
     <item android:id="@+id/menu_settings"
         android:title="@string/menu_settings"
         android:icon="@drawable/setting"
         android:showAsAction="ifRoom|withText" />
+    
     
 </menu>

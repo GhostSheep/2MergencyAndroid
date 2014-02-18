@@ -4,6 +4,7 @@
     <string name="menu_main">Main</string>
     <string name="menu_settings">Setting</string>
     <string name="menu_reserv_call">Scheduled Call</string>
+    <string name="menu_where_am_i">Find my location</string>
     <string name="title_activity_intro">IntroActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_setting">SettingActivity</string>
