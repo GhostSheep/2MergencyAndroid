@@ -4,26 +4,45 @@
     android:versionName="2.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="9"
         android:targetSdkVersion="19" />
 
+    <permission android:name="ghostsheep.com.emergency.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature"/>
+    
+    <uses-permission android:name="ghostsheep.com.emergency.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-feature android:required="true" android:glEsVersion="0x00020000"/>
-    <permission android:name="ghostsheep.com.emergency.permission.MAPS_RECEIVE"></permission>
     
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    
+    
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
+        
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyDlIsNxmD5UhvepiGIK-APJxD8asfl_zxU"/>
+        
+       <meta-data android:name="com.google.android.gms.version"
+           android:value="@integer/google_play_services_version" />
+        
         <activity
             android:name=".IntroActivity"
             android:label="@string/app_name"
@@ -40,10 +59,12 @@
             android:screenOrientation="portrait"
             android:theme="@style/textViewStyle"
             android:windowSoftInputMode="stateHidden"/>
-        <activity
-            android:name="com.google.ads.AdActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
-        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyC_SiSvcZCg4Y-JS9GWgl-c24fw9lLINUk"/>
+        <activity android:name=".WhereAmIActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/textViewStyle"
+            android:windowSoftInputMode="stateHidden"/>
+        
+        
     </application>
 
 </manifest>

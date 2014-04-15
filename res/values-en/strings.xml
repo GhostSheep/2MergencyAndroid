@@ -41,7 +41,9 @@
     <string name="plus">+</string>
     <string name="minus">-</string>
     <string name="exitApp">Are you sure you want to exit the program?</string>
-    <string name="turn_off_a_sound">Turn off a sound</string>
+    <string name="turn_off_a_sound">Turn off a sound.</string>
     <string name="stop">STOP</string>
+    <string name="fixMarker_N_SendSms">Fix a location marker and Send SMS on marker click.</string>
+    <string name="send_Sms">Send SMS.</string>
 
 </resources>

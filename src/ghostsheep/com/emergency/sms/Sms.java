@@ -12,11 +12,13 @@ import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.widget.Toast;
 
-public class Sms {
+public class Sms implements LocationListener {
 	private Context context;
 	private Setting setting;
 	private int viewId;
@@ -30,17 +32,33 @@ public class Sms {
 		this.viewId = viewID;
 	}
 	
+	public Sms(Context context, Setting setting) {
+		this.context = context;
+		this.setting = setting;
+	}
+	
 	public void sendMessage() {
-		
 		// 지역 확인을 위한...
         locationManager = (LocationManager)context.getSystemService(Context.LOCATION_SERVICE);
+        
+        // GPS, NETWORK로부터 위치 정보 갱신 요청
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         
         String provider = locationManager.getBestProvider(new Criteria(), true);
 	    Location location = locationManager.getLastKnownLocation(provider);
 	    
+	    // GSP 사용 확인
+	    boolean isGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+	    
 	    getAddress(location);
 	    
-	    String message = makeMessage(provider);
+	    String message = makeMessage(isGps);
+	    
+	    sendSMS(message);
+	}
+	
+	public void sendMessage(String message) {
 	    
 	    sendSMS(message);
 	}
@@ -58,6 +76,7 @@ public class Sms {
 				return ;
 			}
 			
+			// 주소를 가져오기 위한 설정
 			Geocoder geo = new Geocoder(context, Locale.getDefault());
 	        List<Address> addresses = geo.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 	        if (addresses.isEmpty()) {
@@ -78,14 +97,14 @@ public class Sms {
     /*
      * 상황별 주소 내용을 포함한 message 생성
      */
-    private String makeMessage(String provider) {
+    private String makeMessage(Boolean isGPS) {
     	String message;
 
     	if (null == locationInfo) {
     		locationInfo = "";
     	}
     	
-    	if (0 != provider.compareTo("gps")){
+    	if (isGPS == false){
     		locationInfo += "/" + context.getString(R.string.not_gps_provider);
     	}
     	if (R.id.btnRape == viewId) { // Rape
@@ -113,8 +132,33 @@ public class Sms {
     		}
     	}
     	Intent sendIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("sms:" + url));
+    	sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     	sendIntent.putExtra("address", setting.getEmergencySms());
     	sendIntent.putExtra("sms_body", message);
     	context.startActivity(sendIntent);
     }
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
+	}
 }

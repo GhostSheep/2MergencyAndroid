@@ -13,7 +13,6 @@
         android:layout_weight="8">
         <include layout="@layout/emergency"/>
         <include layout="@layout/reserve_call"/>
-        <include layout="@layout/where_am_i"/>
         <include layout="@layout/setting"/>
     </android.support.v4.view.ViewPager>
 

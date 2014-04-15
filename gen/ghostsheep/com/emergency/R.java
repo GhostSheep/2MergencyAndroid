@@ -225,40 +225,40 @@ containing a value of this type.
         public static final int white_border=0x7f02002a;
     }
     public static final class id {
-        public static final int addNumber=0x7f060018;
-        public static final int btnCall=0x7f060006;
-        public static final int btnKidnap=0x7f060009;
-        public static final int btnRape=0x7f060007;
-        public static final int btnViolence=0x7f060008;
-        public static final int cancel=0x7f060014;
-        public static final int chronometer=0x7f060012;
-        public static final int downButton=0x7f060011;
-        public static final int easy_time=0x7f06000a;
-        public static final int emergencyCall=0x7f060015;
-        public static final int emergencySms=0x7f060019;
+        public static final int addNumber=0x7f060019;
+        public static final int btnCall=0x7f060007;
+        public static final int btnKidnap=0x7f06000a;
+        public static final int btnRape=0x7f060008;
+        public static final int btnViolence=0x7f060009;
+        public static final int cancel=0x7f060015;
+        public static final int chronometer=0x7f060013;
+        public static final int downButton=0x7f060012;
+        public static final int easy_time=0x7f06000b;
+        public static final int emergencyCall=0x7f060016;
+        public static final int emergencySms=0x7f06001a;
         public static final int hybrid=0x7f060004;
         public static final int menu_main=0x7f06001e;
         public static final int menu_reserv_call=0x7f06001f;
-        public static final int menu_settings=0x7f060021;
-        public static final int menu_where_am_i=0x7f060020;
-        public static final int min10=0x7f06000c;
-        public static final int min20=0x7f06000d;
-        public static final int min5=0x7f06000b;
+        public static final int menu_settings=0x7f060020;
+        public static final int menu_where_am_i=0x7f060021;
+        public static final int min10=0x7f06000d;
+        public static final int min20=0x7f06000e;
+        public static final int min5=0x7f06000c;
         public static final int none=0x7f060000;
         public static final int normal=0x7f060001;
-        public static final int numberEditText=0x7f060010;
-        public static final int numbers=0x7f06001b;
-        public static final int phoneNumberCheck=0x7f060017;
+        public static final int numberEditText=0x7f060011;
+        public static final int numbers=0x7f06001c;
+        public static final int phoneNumberCheck=0x7f060018;
         public static final int satellite=0x7f060002;
-        public static final int searchCall=0x7f060016;
-        public static final int searchSms=0x7f06001a;
-        public static final int setTimer=0x7f06000e;
-        public static final int shortCut=0x7f06001c;
-        public static final int start=0x7f060013;
+        public static final int searchCall=0x7f060017;
+        public static final int searchSms=0x7f06001b;
+        public static final int setTimer=0x7f06000f;
+        public static final int shortCut=0x7f06001d;
+        public static final int start=0x7f060014;
         public static final int terrain=0x7f060003;
-        public static final int upButton=0x7f06000f;
+        public static final int upButton=0x7f060010;
         public static final int viewPager=0x7f060005;
-        public static final int whereAmI=0x7f06001d;
+        public static final int whereAmI=0x7f060006;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f080000;
@@ -266,10 +266,10 @@ containing a value of this type.
     public static final class layout {
         public static final int activity_intro=0x7f030000;
         public static final int activity_main=0x7f030001;
-        public static final int emergency=0x7f030002;
-        public static final int reserve_call=0x7f030003;
-        public static final int setting=0x7f030004;
-        public static final int where_am_i=0x7f030005;
+        public static final int activity_where_am_i=0x7f030002;
+        public static final int emergency=0x7f030003;
+        public static final int reserve_call=0x7f030004;
+        public static final int setting=0x7f030005;
     }
     public static final class menu {
         public static final int activity_main=0x7f0a0000;
@@ -383,6 +383,7 @@ containing a value of this type.
         public static final int enable_location_service=0x7f070032;
         public static final int exitApp=0x7f070042;
         public static final int find=0x7f070034;
+        public static final int fixMarker_N_SendSms=0x7f070045;
         public static final int input_number=0x7f070036;
         public static final int kidnap=0x7f07002b;
         public static final int kidnap_message=0x7f07002f;
@@ -403,6 +404,7 @@ containing a value of this type.
         public static final int rape=0x7f07002a;
         public static final int rape_message=0x7f070030;
         public static final int send=0x7f07002e;
+        public static final int send_Sms=0x7f070046;
         public static final int set_timer=0x7f07003f;
         public static final int short_cut=0x7f070037;
         public static final int start=0x7f07003a;

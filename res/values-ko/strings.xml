@@ -43,5 +43,7 @@
     <string name="exitApp">프로그램을 종료하시겠습니까?</string>
     <string name="turn_off_a_sound">소리 끄기</string>
     <string name="stop">중지</string>
+    <string name="fixMarker_N_SendSms">위치 표시를 정확한 곳으로 옮기고 표시를 눌러 문자를 전송하세요.</string>
+    <string name="send_Sms">문자를 전송합니다.</string>
     
 </resources>

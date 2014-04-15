@@ -1,11 +1,9 @@
 package ghostsheep.com.emergency;
 
-import ghostsheep.com.common.Constant;
 import ghostsheep.com.classes.EmergencyView;
 import ghostsheep.com.classes.ReserveCallView;
 import ghostsheep.com.classes.SettingView;
-import ghostsheep.com.classes.WhereAmIView;
-import android.app.Activity;
+import ghostsheep.com.common.Constant;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -19,6 +17,7 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -28,15 +27,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends Activity implements SensorEventListener {
+public class MainActivity extends FragmentActivity implements SensorEventListener {
 	
 	private ViewPager viewPager;
 	private PagerAdapterClass pAdapterClass;
 	
-	// 필수 View
+	// Views
 	private EmergencyView emergencyView;
 	private ReserveCallView reserveCallView;
-	private WhereAmIView whereAmIView;
 	private SettingView settingView;
 	
 	private int prePosition;
@@ -109,10 +107,9 @@ public class MainActivity extends Activity implements SensorEventListener {
 		});
         //---> ViewPage
         
-        emergencyView = new EmergencyView(this);
-        reserveCallView = new ReserveCallView(this);
-        whereAmIView = new WhereAmIView(this);
-        settingView = new SettingView(this);
+        emergencyView = new EmergencyView(MainActivity.this);
+        reserveCallView = new ReserveCallView(MainActivity.this);
+        settingView = new SettingView(MainActivity.this);
     }
     
     private void initSound() {
@@ -177,14 +174,16 @@ public class MainActivity extends Activity implements SensorEventListener {
 			break;
 		}
 		
-		case R.id.menu_where_am_i:
-		{
-			viewPager.setCurrentItem(Constant.whereAmIView);
-			break;
-		}
 		case R.id.menu_settings:
 		{
 			viewPager.setCurrentItem(Constant.settingView);
+			break;
+		}
+		
+		case R.id.menu_where_am_i:
+		{
+			Intent intent = new Intent(this, WhereAmIActivity.class);
+	        startActivity(intent);
 			break;
 		}
 		
@@ -272,7 +271,7 @@ public class MainActivity extends Activity implements SensorEventListener {
 	                    	streamID = soundPool.play( siren, 1f, 1f, 0, -1, 1f );
 	                    	cnt = 0;
 	                    	
-	                    	AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+	                    	AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 	                    	builder.setTitle(getString(R.string.turn_off_a_sound));
 	                    	builder.setNegativeButton(getString(R.string.stop), new DialogInterface.OnClickListener() {
 								
@@ -321,12 +320,7 @@ private class PagerAdapterClass extends PagerAdapter {
 	        	v = mInflater.inflate(R.layout.reserve_call, null);
 	        	reserveCallView.initView(v);
 	        	reserveCallView.initEvent();
-	        } else if (Constant.whereAmIView == position) {
-	        	v = mInflater.inflate(R.layout.where_am_i, null);
-	        	whereAmIView.initView(v);
-	        	whereAmIView.initEvent();
-	        }
-	        else {
+	        } else if (Constant.settingView == position) {
 	            v = mInflater.inflate(R.layout.setting, null);
 	            settingView.initView(v);
 	            settingView.initEvent(v);
