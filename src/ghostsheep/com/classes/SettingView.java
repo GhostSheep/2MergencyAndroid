@@ -116,38 +116,6 @@ public class SettingView implements OnClickListener {
 		}
     }
     
-    @Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-    	switch(v.getId()) {
-    	case R.id.searchCall:
-    		buttonName = "searchCall";
-			getNumber();
-			break;
-    	case R.id.searchSms:
-    		if (false == phoneNumberCheck.isChecked()) {
-				buttonName = "searchSms";
-				getNumber();
-			}
-    		break;
-    	case R.id.shortCut:
-    		if (true == bShortCut) {
-				bShortCut = false;
-				shortCut.setImageResource(R.drawable.toggle);
-	    	} else {
-	    		bShortCut = true;
-	    		shortCut.setImageResource(R.drawable.toggle_clicked);
-	    	}
-    		break;
-    	case R.id.addNumber:
-    		addNumber();
-    		break;
-    	default:
-    		buttonName = String.valueOf(v.getId());
-    		getNumber();
-    		break;
-    	}
-	}
     /*
      * Event connection
      */
@@ -197,6 +165,40 @@ public class SettingView implements OnClickListener {
 			}
 		});
     }
+    
+    @Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+    	switch(v.getId()) {
+    	case R.id.searchCall:
+    		buttonName = "searchCall";
+			getNumber();
+			break;
+    	case R.id.searchSms:
+    		if (false == phoneNumberCheck.isChecked()) {
+				buttonName = "searchSms";
+				getNumber();
+			}
+    		break;
+    	case R.id.shortCut:
+    		if (true == bShortCut) {
+				bShortCut = false;
+				shortCut.setImageResource(R.drawable.toggle);
+	    	} else {
+	    		bShortCut = true;
+	    		shortCut.setImageResource(R.drawable.toggle_clicked);
+	    	}
+    		break;
+    	case R.id.addNumber:
+    		addNumber();
+    		break;
+    	default:
+    		buttonName = String.valueOf(v.getId());
+    		getNumber();
+    		break;
+    	}
+	}
+    
     
     /*
      * 설정 저장
@@ -271,6 +273,9 @@ public class SettingView implements OnClickListener {
 		}
     }
     
+    /*
+     * 번호 추가
+     */
     private void addNumber() {
     	if (5 < controlNum) {
     		Toast.makeText(context, "추가 번호는 최대 5개까지만 저장할 수 있습니다.", Toast.LENGTH_SHORT).show();

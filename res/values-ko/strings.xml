@@ -45,5 +45,11 @@
     <string name="stop">중지</string>
     <string name="fixMarker_N_SendSms">위치 표시를 정확한 곳으로 옮기고 표시를 눌러 문자를 전송하세요.</string>
     <string name="send_Sms">문자를 전송합니다.</string>
+    <string name="address">주소</string>
+    <string name="latitude">위도</string>
+    <string name="longitude">경도</string>
+    <string name="text">문자</string>
+    <string name="image">이미지</string>
+    <string name="textNimage">문자+이미지</string>
     
 </resources>

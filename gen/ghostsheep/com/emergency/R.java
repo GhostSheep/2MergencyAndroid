@@ -279,6 +279,7 @@ containing a value of this type.
     }
     public static final class string {
         public static final int added_number=0x7f070029;
+        public static final int address=0x7f070047;
         public static final int app_name=0x7f07001a;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
@@ -384,9 +385,12 @@ containing a value of this type.
         public static final int exitApp=0x7f070042;
         public static final int find=0x7f070034;
         public static final int fixMarker_N_SendSms=0x7f070045;
+        public static final int image=0x7f07004b;
         public static final int input_number=0x7f070036;
         public static final int kidnap=0x7f07002b;
         public static final int kidnap_message=0x7f07002f;
+        public static final int latitude=0x7f070048;
+        public static final int longitude=0x7f070049;
         public static final int menu_main=0x7f07001b;
         public static final int menu_reserv_call=0x7f07001d;
         public static final int menu_settings=0x7f07001c;
@@ -409,6 +413,8 @@ containing a value of this type.
         public static final int short_cut=0x7f070037;
         public static final int start=0x7f07003a;
         public static final int stop=0x7f070044;
+        public static final int text=0x7f07004a;
+        public static final int textNimage=0x7f07004c;
         public static final int title_activity_intro=0x7f07001f;
         public static final int title_activity_main=0x7f070020;
         public static final int title_activity_setting=0x7f070021;

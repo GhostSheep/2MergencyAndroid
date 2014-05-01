@@ -25,6 +25,7 @@ public class EmergencyView implements OnClickListener {
 	}
 	
 	private void initView() {
+		// User's language
 		language = context.getResources().getConfiguration().locale.getLanguage();
         
         if (null == setting) {

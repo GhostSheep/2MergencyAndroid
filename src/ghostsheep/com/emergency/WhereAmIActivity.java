@@ -1,14 +1,20 @@
 package ghostsheep.com.emergency;
 
+import ghostsheep.com.common.RecycleUtils;
 import ghostsheep.com.emergency.setting.Setting;
 import ghostsheep.com.emergency.sms.Sms;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -29,6 +35,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
+import com.google.android.gms.maps.GoogleMap.SnapshotReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -42,6 +49,7 @@ implements OnInfoWindowClickListener, OnMarkerDragListener, SensorEventListener,
 	GoogleMap googleMap;
 	
 	private String locationInfo;
+	private String imageUrl;
 	
 	// 진동 확인을 위한 변수
 	private long lastTime;
@@ -82,9 +90,14 @@ implements OnInfoWindowClickListener, OnMarkerDragListener, SensorEventListener,
     
     private void initLocation()
     {
-    	SupportMapFragment supportMapFragment = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.whereAmI);
-        googleMap = supportMapFragment.getMap();
+    	SupportMapFragment supportMapFragment
+    		= (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.whereAmI);
+    	
+    	if (googleMap == null) { 
+    		googleMap = supportMapFragment.getMap();
+    	}
         
+    	googleMap.clear();
         googleMap.setMyLocationEnabled(true);
         
         LocationManager locationManager = (LocationManager)getSystemService(LOCATION_SERVICE);
@@ -110,7 +123,8 @@ implements OnInfoWindowClickListener, OnMarkerDragListener, SensorEventListener,
         	googleMap.setOnMarkerDragListener(this);
         	googleMap.setOnInfoWindowClickListener(this);
         	
-        	Toast.makeText(getApplicationContext(), getString(R.string.fixMarker_N_SendSms), Toast.LENGTH_LONG).show();
+        	Toast.makeText(getApplicationContext(),
+        			getString(R.string.fixMarker_N_SendSms), Toast.LENGTH_LONG).show();
         }
     }
     
@@ -124,8 +138,26 @@ implements OnInfoWindowClickListener, OnMarkerDragListener, SensorEventListener,
     }
     
     @Override
+    protected void onDestroy() {
+    	if (sensorManager != null) {
+            sensorManager.unregisterListener(this);
+    	}
+    	
+    	RecycleUtils.recursiveRecycle(getWindow().getDecorView());
+    	System.gc();
+    	
+    	super.onDestroy();
+    }
+    
+    @Override
     protected void onStart() {
     	
+    	// map setting
+        initLocation();
+        
+        // 사이렌 setting
+        initSound();
+        
     	if (accelerormeterSensor != null) {
             sensorManager.registerListener(this, accelerormeterSensor, SensorManager.SENSOR_DELAY_GAME);
     	}
@@ -152,33 +184,77 @@ implements OnInfoWindowClickListener, OnMarkerDragListener, SensorEventListener,
 	public void onInfoWindowClick(Marker marker) {
 		// TODO Auto-generated method stub
     	String location = marker.getTitle();
-    	if (location.compareTo("Here!") == 0) {
+    	if (location.compareTo("") == 0) {
     		return;
     	}
+    	screenShot();
     	
-    	final String message = getString(R.string.violence_message) + location;
+    	final String message = getString(R.string.address) + ": " + location;
     	
     	AlertDialog.Builder alert = new Builder(WhereAmIActivity.this);
 		alert.setMessage(getString(R.string.send_Sms));
-		alert.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+		alert.setPositiveButton(getString(R.string.text), new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
 				sms = new Sms(getApplicationContext(), setting);
-				sms.sendMessage(message);
+				sms.sendMessage(message, "");
 			}
 		});
-		alert.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+		alert.setNeutralButton(getString(R.string.image), new DialogInterface.OnClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				dialog.dismiss();
+				sms = new Sms(getApplicationContext(), setting);
+				sms.sendMessage("", imageUrl);
+			}
+		});
+		alert.setNegativeButton(getString(R.string.textNimage), new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				sms = new Sms(getApplicationContext(), setting);
+				sms.sendMessage(message, imageUrl);
 			}
 		});
 		alert.show();
 	}
+ 
+    private void screenShot() {
+    	SnapshotReadyCallback callback = new SnapshotReadyCallback() {
+			
+			@SuppressLint("WorldReadableFiles")
+			@SuppressWarnings("deprecation")
+			@Override
+			public void onSnapshotReady(Bitmap snapshot) {
+				// TODO Auto-generated method stub
+				Bitmap bitmap = snapshot;
+				
+				OutputStream outputStream = null;
+				
+				String path = "Where Am I.jpg";
+				
+				try {
+					outputStream = openFileOutput(path, MODE_WORLD_READABLE);
+					bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+					outputStream.flush();
+					outputStream.close();
+					
+					File file = getFileStreamPath(path);
+					imageUrl = file.getAbsolutePath();
+				} catch (FileNotFoundException e) {
+					path = "";
+				} catch (Exception e) {
+					path = "";
+				}
+			}
+		};
+		
+		googleMap.snapshot(callback);
+    }
     
     @Override
 	public void onMarkerDrag(Marker marker) {
@@ -195,20 +271,22 @@ implements OnInfoWindowClickListener, OnMarkerDragListener, SensorEventListener,
 	}
 	
 	/*
-     * 현재 지역을 기반으로 주소를 뽑아냄
+     * 현재 지역을 기반으로 주소를 뽑아냄 / 주소가 나오지 않으면 위도, 경도 표시
      */
     private void getAddress(LatLng nowPosition) {
     	try {
     		String locationInfo = "";
 			Geocoder geo = new Geocoder(getApplicationContext(), Locale.getDefault());
 	        List<Address> addresses = geo.getFromLocation(nowPosition.latitude, nowPosition.longitude, 1);
-	        if (addresses.isEmpty()) {
-	        	locationInfo = "Waiting for Location";
-	        } else {
-	            if (addresses.size() > 0) {
-	            	locationInfo = addresses.get(0).getAddressLine(0);
-	            }
-	        }
+	        
+	        // 위도, 경도 추가
+	        locationInfo = getString(R.string.latitude) + ": " + String.valueOf(nowPosition.latitude) + ", " +
+    				       getString(R.string.longitude) + ": " + String.valueOf(nowPosition.longitude);
+	        
+	        // 주소 확인되면 주소로 추가
+	        if (addresses.isEmpty() == false && addresses.size() > 0) {
+            	locationInfo = addresses.get(0).getAddressLine(0);
+            }
 	        
 	        this.locationInfo = locationInfo;
 	    }
@@ -256,20 +334,23 @@ implements OnInfoWindowClickListener, OnMarkerDragListener, SensorEventListener,
                     		}
                     		final int volume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
                     		int volumeMax = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-                    		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volumeMax, AudioManager.FLAG_PLAY_SOUND);
+                    		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
+                    				volumeMax, AudioManager.FLAG_PLAY_SOUND);
 	                    	streamID = soundPool.play( siren, 1f, 1f, 0, -1, 1f );
 	                    	cnt = 0;
 	                    	
 	                    	AlertDialog.Builder builder = new AlertDialog.Builder(WhereAmIActivity.this);
 	                    	builder.setTitle(getString(R.string.turn_off_a_sound));
-	                    	builder.setNegativeButton(getString(R.string.stop), new DialogInterface.OnClickListener() {
+	                    	builder.setNegativeButton(getString(R.string.stop),
+	                    			new DialogInterface.OnClickListener() {
 								
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									// TODO Auto-generated method stub
 									soundPool.stop(streamID);
 									streamID = 0;
-									audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_PLAY_SOUND);
+									audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
+											volume, AudioManager.FLAG_PLAY_SOUND);
 								}
 							});
 	                    	builder.setCancelable(false);

@@ -55,12 +55,12 @@ public class Sms implements LocationListener {
 	    
 	    String message = makeMessage(isGps);
 	    
-	    sendSMS(message);
+	    sendSMS(message, "");
 	}
 	
-	public void sendMessage(String message) {
+	public void sendMessage(String message, String imageUrl) {
 	    
-	    sendSMS(message);
+	    sendSMS(message, imageUrl);
 	}
 	
 	/*
@@ -104,17 +104,19 @@ public class Sms implements LocationListener {
     		locationInfo = "";
     	}
     	
+    	// gps 연결이 안되어 위치가 정확하지 않을 때
     	if (isGPS == false){
-    		locationInfo += "/" + context.getString(R.string.not_gps_provider);
+    		locationInfo += " / " + context.getString(R.string.not_gps_provider);
     	}
+    	
     	if (R.id.btnRape == viewId) { // Rape
-    		message = context.getString(R.string.rape_message) + "/" + locationInfo;
+    		message = context.getString(R.string.rape_message) + locationInfo;
     	} else if (R.id.btnViolence == viewId) {  // Violence
-    		message = context.getString(R.string.violence_message) + "/" + locationInfo;
+    		message = context.getString(R.string.violence_message) + locationInfo;
     	} else if (R.id.btnKidnap ==viewId) {
-    		message = context.getString(R.string.kidnap_message) + "/" + locationInfo;
+    		message = context.getString(R.string.kidnap_message) + locationInfo;
     	} else {  // Kidnap
-    		message = context.getString(R.string.violence_message) + "/" + locationInfo;
+    		message = context.getString(R.string.violence_message) + locationInfo;
     	}
     	
     	return message;
@@ -123,7 +125,7 @@ public class Sms implements LocationListener {
     /*
      * 지정된 번호로 만들어진 message 전송
      */
-    private void sendSMS(String message) {
+    private void sendSMS(String message, String imageUrl) {
     	String url = setting.getEmergencySms();
     	
     	for (int i = 1; i < 6; ++i) {
@@ -131,10 +133,21 @@ public class Sms implements LocationListener {
     			url = url + ";" + setting.getAddedNumber(i);
     		}
     	}
-    	Intent sendIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("sms:" + url));
+    	
+    	Uri uri = null;
+    	
+    	Intent sendIntent = new Intent(Intent.ACTION_SEND);
     	sendIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    	sendIntent.putExtra("address", setting.getEmergencySms());
-    	sendIntent.putExtra("sms_body", message);
+    	sendIntent.setClassName("com.android.mms", "com.android.mms.ui.ComposeMessageActivity");
+    	sendIntent.putExtra("address", url);
+    	if (message.isEmpty() == false && message.compareTo("") != 0) {
+    		sendIntent.putExtra("sms_body", message);
+    	}
+    	if (imageUrl.isEmpty() == false && imageUrl.compareTo("") != 0) {
+    		uri = Uri.parse("file://" + imageUrl);
+    		sendIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        	sendIntent.setType("image/jpeg");
+    	}
     	context.startActivity(sendIntent);
     }
 

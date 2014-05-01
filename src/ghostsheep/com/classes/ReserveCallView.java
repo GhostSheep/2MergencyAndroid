@@ -61,57 +61,6 @@ public class ReserveCallView implements OnClickListener {
     	downButton = (Button)view.findViewById(R.id.downButton);
 		downButton.setEnabled(false);
 	}
-	
-	@Override
-	public void onClick(View v) {
-		// TODO Auto-generated method stub
-		switch(v.getId()) {
-		case R.id.start:
-			start.setEnabled(false);
-			start.setTextColor(Color.GRAY);
-			cancel.setEnabled(true);
-			cancel.setTextColor(Color.WHITE);
-			if (R.id.min5 == easyTime.getCheckedRadioButtonId()) {
-				startTimer(getInterval(5));
-			} else if (R.id.min10 == easyTime.getCheckedRadioButtonId()) {
-				startTimer(getInterval(10));
-			} else if (R.id.min20 == easyTime.getCheckedRadioButtonId()) {
-				startTimer(getInterval(5));
-			} else if (R.id.setTimer == easyTime.getCheckedRadioButtonId()) {
-				startTimer(getInterval(Integer.valueOf(numberEdit.getText().toString())));
-			}
-			break;
-		case R.id.cancel:
-			stopTimer();
-			start.setEnabled(true);
-			start.setTextColor(Color.WHITE);
-			cancel.setEnabled(false);
-			cancel.setTextColor(Color.GRAY);
-			break;
-		case R.id.upButton:
-			if (value >= minrange && value <= maxrange) {
-				value++;
-			}
-			
-			if (value > maxrange) {
-				value = minrange;
-			}
-			
-			numberEdit .setText(value + "");
-			break;
-		case R.id.downButton:
-			if (value >= minrange && value <= maxrange) {
-				value--;
-			}
-			
-			if (value < minrange) {
-				value = maxrange;
-			}
-			
-			numberEdit .setText(value + "");
-			break;
-		}
-	}
     
     public void initEvent() {
 		start.setOnClickListener(this);
@@ -199,10 +148,8 @@ public class ReserveCallView implements OnClickListener {
     	Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + setting.getEmergencyCall()));
     	context.startActivity(intent);
 		
-		chronometer.stop();
-		chronometerRunning = false;
+    	stopTimer();
 		chronometer.setBase(SystemClock.elapsedRealtime());
-    	m_Handler.removeMessages(0);
     }
     
     /*
@@ -212,6 +159,56 @@ public class ReserveCallView implements OnClickListener {
     	chronometer.stop();
     	chronometerRunning = false;
     	m_Handler.removeMessages(0);
-    	
     }
+    
+    @Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch(v.getId()) {
+		case R.id.start:
+			start.setEnabled(false);
+			start.setTextColor(Color.GRAY);
+			cancel.setEnabled(true);
+			cancel.setTextColor(Color.WHITE);
+			if (R.id.min5 == easyTime.getCheckedRadioButtonId()) {
+				startTimer(getInterval(5));
+			} else if (R.id.min10 == easyTime.getCheckedRadioButtonId()) {
+				startTimer(getInterval(10));
+			} else if (R.id.min20 == easyTime.getCheckedRadioButtonId()) {
+				startTimer(getInterval(5));
+			} else if (R.id.setTimer == easyTime.getCheckedRadioButtonId()) {
+				startTimer(getInterval(Integer.valueOf(numberEdit.getText().toString())));
+			}
+			break;
+		case R.id.cancel:
+			stopTimer();
+			start.setEnabled(true);
+			start.setTextColor(Color.WHITE);
+			cancel.setEnabled(false);
+			cancel.setTextColor(Color.GRAY);
+			break;
+		case R.id.upButton:
+			if (value >= minrange && value <= maxrange) {
+				value++;
+			}
+			
+			if (value > maxrange) {
+				value = minrange;
+			}
+			
+			numberEdit.setText(value + "");
+			break;
+		case R.id.downButton:
+			if (value >= minrange && value <= maxrange) {
+				value--;
+			}
+			
+			if (value < minrange) {
+				value = maxrange;
+			}
+			
+			numberEdit.setText(value + "");
+			break;
+		}
+	}
 }

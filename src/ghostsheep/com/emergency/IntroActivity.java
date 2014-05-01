@@ -1,5 +1,6 @@
 package ghostsheep.com.emergency;
 
+import ghostsheep.com.common.RecycleUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,7 +30,7 @@ public class IntroActivity extends Activity {
     }
     
     private void moveMainActivity() {
-    	Intent intent = new Intent(this, MainActivity.class);
+    	Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         
         startActivity(intent);
         finish();
@@ -41,6 +42,10 @@ public class IntroActivity extends Activity {
     	if (m_Handler != null) {
     		m_Handler = null;
     	}
+    	
+    	RecycleUtils.recursiveRecycle(getWindow().getDecorView());
+    	System.gc();
+    	
     	super.onDestroy();
     }
 }

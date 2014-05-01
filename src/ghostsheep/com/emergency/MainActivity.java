@@ -4,6 +4,7 @@ import ghostsheep.com.classes.EmergencyView;
 import ghostsheep.com.classes.ReserveCallView;
 import ghostsheep.com.classes.SettingView;
 import ghostsheep.com.common.Constant;
+import ghostsheep.com.common.RecycleUtils;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.Context;
@@ -118,6 +119,14 @@ public class MainActivity extends FragmentActivity implements SensorEventListene
     }
     
     @Override
+    protected void onDestroy() {
+    	RecycleUtils.recursiveRecycle(getWindow().getDecorView());
+    	System.gc();
+    	
+    	super.onDestroy();
+    }
+    
+    @Override
     protected void onStart() {
     	if (Constant.settingView != viewPager.getCurrentItem()) {
     		if (reserveCallView.chronometerRunning == false) {
@@ -204,7 +213,11 @@ public class MainActivity extends FragmentActivity implements SensorEventListene
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
+					if (Constant.settingView == viewPager.getCurrentItem() && null != settingView) {
+			    		settingView.SaveSetting();
+			    		viewPager.setCurrentItem(Constant.emergencyView);
+			    	}
+					
 					System.exit(0);
 				}
 			});
@@ -260,6 +273,7 @@ public class MainActivity extends FragmentActivity implements SensorEventListene
                 // 흔들림 감지 시
                 if (speed > SHAKE_THRESHOLD) {
                     cnt++;
+                    // prepare for mistake
                     if (cnt > 4) {
                     	if (0 >= streamID) {
                     		if (null == audioManager) {
