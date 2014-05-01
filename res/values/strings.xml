@@ -1,0 +1,55 @@
+<resources>
+
+    <string name="app_name">2Mergency</string>
+    <string name="menu_main">Main</string>
+    <string name="menu_settings">Setting</string>
+    <string name="menu_reserv_call">Scheduled Call</string>
+    <string name="menu_where_am_i">Find my location</string>
+    <string name="title_activity_intro">IntroActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
+    <string name="emergency_number">911</string>
+    <string name="emergency_call">Emergency Call</string>
+    <string name="do_you_want_to_call_emergency_call">Do you want to call</string>
+    <string name="call">Call</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="emergency_sms">Emergency SMS</string>
+    <string name="added_number">Add Numbers</string>
+    <string name="rape">Rape</string>
+    <string name="kidnap">Kidnap</string>
+    <string name="violence">Violence</string>
+    <string name="title_activity_sms">SmsActivity</string>
+    <string name="send">Send</string>
+    <string name="kidnap_message">I am in danger of being KIDNAPPED at</string>
+    <string name="rape_message">I am in danger of being RAPED at</string>
+    <string name="violence_message">I am in danger of being ATTACKED at</string>
+    <string name="enable_location_service">Please enable Location Service on the Phone.</string>
+    <string name="no_emergency_number">Specified emergency numbers does not exist. Please enter a phone numbers.</string>
+    <string name="find">Find</string>
+    <string name="not_gps_provider">Location information is inaccurate because GPS provider cannot used.</string>
+    <string name="input_number">Enter numbers</string>
+    <string name="short_cut">Short Cut</string>
+    <string name="using_same_number">Using the same emergency numbers</string>
+    <string name="message_transfer_is_complete">Message transfer is complete</string>
+    <string name="start">Start</string>
+    <string name="min">min</string>
+    <string name="min5">5 min</string>
+    <string name="min10">10 min</string>
+    <string name="min20">20 min</string>
+    <string name="set_timer">Set timer</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="exitApp">Are you sure you want to exit the program?</string>
+    <string name="turn_off_a_sound">Turn off a sound.</string>
+    <string name="stop">STOP</string>
+    <string name="fixMarker_N_SendSms">Fix a location marker and Send SMS on marker click.</string>
+    <string name="send_Sms">Send SMS.</string>
+    <string name="address">Address</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="text">Text</string>
+    <string name="image">Image</string>
+    <string name="textNimage">Text+Image</string>
+
+</resources>
